@@ -20,6 +20,13 @@ hkdf        = "0.12"
 # Field arithmetic for Elligator / Kummer line (Paper 2)
 num-bigint  = { version = "0.4", features = ["rand"] }
 num-traits  = "0.2"
+# Epoch content encryption + epoch-key sealing (Knee Tie's own design)
+chacha20poly1305 = "0.10"
+# Per-post pseudonym signing (mature, audited — unlike DGMT/Elligator-K1
+# which are recent research constructions implemented from the papers)
+ed25519-dalek     = "2"
+# Password-based key derivation for the local encrypted identity store
+argon2            = "0.5"
 
 [dev-dependencies]
 hex-literal = "0.4"
