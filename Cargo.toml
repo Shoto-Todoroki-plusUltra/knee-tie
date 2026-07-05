@@ -1,35 +1,10 @@
-[package]
-name = "knee-tie-crypto"
-version = "0.1.0"
-edition = "2021"
-description = "Post-quantum cryptographic primitives for Knee Tie"
-license = "AGPL-3.0"
+[workspace]
+resolver = "2"
+members = [
+    "crates/knee-tie-crypto",
+]
 
-[dependencies]
-sha2        = "0.10"
-aes         = "0.8"
-cipher      = "0.4"
-hmac        = "0.12"
-rand        = "0.8"
-rand_core   = { version = "0.6", features = ["getrandom"] }
-zeroize     = { version = "1.6", features = ["derive"] }
-subtle      = "2.5"
-thiserror   = "1.0"
-hex         = "0.4"
-hkdf        = "0.12"
-# Field arithmetic for Elligator / Kummer line (Paper 2)
-num-bigint  = { version = "0.4", features = ["rand"] }
-num-traits  = "0.2"
-# Epoch content encryption + epoch-key sealing (Knee Tie's own design)
-chacha20poly1305 = "0.10"
-# Per-post pseudonym signing (mature, audited — unlike DGMT/Elligator-K1
-# which are recent research constructions implemented from the papers)
-ed25519-dalek     = "2"
-# Password-based key derivation for the local encrypted identity store
-argon2            = "0.5"
-
-[dev-dependencies]
-hex-literal = "0.4"
-
-[profile.release]
-overflow-checks = true
+# Future members (added as each phase begins):
+#   "crates/knee-tie-server"    — Phase 2
+#   "crates/knee-tie-protocol"  — Phase 3
+#   "crates/knee-tie-client"    — Phase 4

@@ -1,0 +1,28 @@
+*** REPLACE THIS FILE BEFORE PUBLISHING ***
+
+This project is licensed under the GNU Affero General Public License,
+version 3 (AGPL-3.0). This placeholder exists because the full license
+text (~15,000 words) needs to be reproduced byte-for-byte to be legally
+correct, and should come from an authoritative source rather than being
+reconstructed — do one of the following:
+
+OPTION A (recommended, easiest): When creating the repository on GitHub,
+use the built-in "Add a license" step and select "GNU Affero General
+Public License v3.0". GitHub inserts the exact, official text
+automatically. This will REPLACE this placeholder file.
+
+OPTION B: Download the canonical text directly and overwrite this file:
+
+    curl -o LICENSE https://www.gnu.org/licenses/agpl-3.0.txt
+
+Then verify the file starts with:
+
+    GNU AFFERO GENERAL PUBLIC LICENSE
+    Version 3, 19 November 2007
+
+and ends with the "How to Apply These Terms" section.
+
+After replacing this file, add the standard short-form notice near the
+top of Cargo.toml files and/or a NOTICE file if you want an additional
+human-readable pointer (not required — the LICENSE file alone is
+sufficient and is what `license = "AGPL-3.0"` in Cargo.toml refers to).
