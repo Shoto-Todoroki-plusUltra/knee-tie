@@ -12,7 +12,7 @@ group signatures and traffic-indistinguishable key exchange.
 
 ## What this is
 
-Each community on Knee Tie is a fully independent, self-contained space —
+Each community on Knee Tie is a fully independent, self-contained space;
 closer to a standalone forum than to a subreddit within a larger site.
 Members hold a **persistent pseudonym** within a community (so reputation
 and normal forum dynamics work) that **cannot be linked to their real-world
@@ -48,14 +48,14 @@ Phase 5 — Packaging & launch                                 ⬜ not started
 Phase 1 has 120+ passing tests covering the full DGMT lifecycle
 (join → sign → verify → revoke → open), Elligator-K1 encode/decode,
 Diffie-Hellman shared-secret agreement, epoch-key content confidentiality,
-and pseudonym signing — including a combined test exercising all of these
+and pseudonym signing, including a combined test exercising all of these
 together in one realistic post lifecycle.
 
 **Known limitations that must be addressed before any real deployment**
 (see `docs/SPECIFICATION.md` §10 for full detail):
 
 - The strong pseudorandom permutation used internally (`utils::sprp`) is
-  only a 2-round Feistel network — correctly invertible, but not
+  only a 2-round Feistel network: correctly invertible, but not
   established as cryptographically strong. Needs hardening.
 - A public value (`pub_seed`) is currently derived indirectly from secret
   key material. Should become an independent random value.
@@ -64,7 +64,7 @@ together in one realistic post lifecycle.
 - No external security audit has been performed.
 
 Two genuine cryptographic bugs were found and fixed during Phase 1
-development — see §10.1 of the specification for what they were and, more
+development; see §10.1 of the specification for what they were and, more
 importantly, *why the original tests didn't catch them*. That history is
 kept in the specification deliberately, as a record of what to watch for
 in future work on this codebase.
@@ -95,12 +95,12 @@ cargo test --workspace
 ```
 
 Requires a current stable Rust toolchain. No other setup needed for
-Phase 1 — the crypto library has no external service dependencies.
+Phase 1. The crypto library has no external service dependencies.
 
 ## Why AGPL-3.0
 
-Anyone who runs a *modified* Knee Tie server — self-hosted or as part of
-a hosted instance — must publish their modifications. Without this
+Anyone who runs a *modified* Knee Tie server, whether self-hosted or as part of
+a hosted instance, must publish their modifications. Without this
 requirement, an operator could silently alter server behavior (for
 example, secretly logging identifying data) while still appearing to run
 the trusted open-source code, which would undermine the project's entire
@@ -111,7 +111,7 @@ cover network-only use), would not close this gap.
 
 See [`CONTRIBUTING.md`](CONTRIBUTING.md). Given the security-sensitive
 nature of this project, independent review of the cryptographic code is
-especially welcome — see [`SECURITY.md`](SECURITY.md) for how to report
+especially welcome. See [`SECURITY.md`](SECURITY.md) for how to report
 issues responsibly.
 
 ## License
