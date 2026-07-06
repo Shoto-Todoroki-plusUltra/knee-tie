@@ -1,7 +1,5 @@
 # Knee Tie — Project Specification & Roadmap
 
-**Status document. Last updated: implementation status reflects completion of Phase 1 (cryptographic library).**
-
 ---
 
 ## 1. What Knee Tie Is
@@ -108,8 +106,7 @@ Each community is a self-contained cryptographic and social unit:
 ### 4.2 Deployment Modes
 
 1. **Self-hosted.** Anyone downloads the open-source server and runs their own instance for their community. Full control, no dependency on the project.
-2. **Centralized fallback (project-operated).** For communities/founders who cannot self-host. Free tier with defined storage/post/member limits; paid tier via Monero (chosen specifically to keep payment itself from creating an identity-linkage the rest of the system avoids). See §9 for status (not yet built — Phase 2+).
-3. **~~Peer-to-peer~~ — deferred.** Considered and explicitly rejected for the current scope. See §1.
+2. **Centralized fallback (project-operated).** For communities/founders who cannot self-host. Free tier with defined storage/post/member limits; paid tier via Monero (chosen specifically to keep payment itself from creating an identity-linkage the rest of the system avoids). Yet to come.
 
 ### 4.3 What the Server Can and Cannot Do
 
@@ -213,8 +210,6 @@ The founder can dissolve a community; a 48-hour delay (giving members time to ar
 
 ## 9. Implementation Status
 
-### 9.1 Phase 1 — Cryptographic Library (`knee-tie-crypto`) — **Complete**
-
 A pure Rust library (AGPL-3.0, edition 2021), no networking, no application logic. 120+ unit/integration tests, all passing.
 
 | Module | Contents | Status |
@@ -243,19 +238,6 @@ A pure Rust library (AGPL-3.0, edition 2021), no networking, no application logi
 
 **Test coverage highlights:** full DGMT lifecycle (join → key distribution → sign → verify → revoke → open); cross-community signature isolation; forged-signature rejection; DH shared-secret agreement between independent parties; a full combined-stack test exercising DGMT registration + Ed25519 authorship + epoch-key encryption + Elligator-K1 sealing together, matching the real intended usage pattern; an epoch-revocation end-to-end test confirming a revoked member loses future access while retaining past access; identity-store roundtrip with wrong-passphrase rejection.
 
-### 9.2 Phase 2 — Server — **Not started**
-
-Planned: a minimal async HTTP server (Axum), SQLite + filesystem for encrypted-blob storage, Tor hidden-service integration (`arti`). Explicitly *not* implementing: any decryption, any identity resolution, any content moderation logic (that stays client/protocol-side).
-
-### 9.3 Phase 3 — Protocol Library — **Not started**
-
-The application-logic layer connecting Phase 1 (crypto) and Phase 2 (server) into the actual join/post/moderate/govern operations described in §6–§8, as async Rust functions.
-
-### 9.4 Phase 4 — TUI Client — **Not started**
-
-`ratatui`-based terminal client: community browser, feed, compose, poll view, moderation queue, join/create wizards, local identity/settings management.
-
-### 9.5 Phase 5 — Packaging — **Not started**
 
 Self-hosting documentation, protocol specification (so third parties can build interoperable clients/servers), security-model document, and launch of the project-operated centralized fallback instance.
 
@@ -298,29 +280,3 @@ Strong-anonymity systems have a documented history of enabling serious harm (CSA
 - A separate, larger-scale "anonymous Twitter" concept was explicitly considered and **rejected** during scoping: the combination of public reach, viral spread, and no community-level accountability structure changes the harm calculus in a way that Knee Tie's small-community design specifically avoids.
 - The project maintains a clear line between **the open-source protocol** (usable by anyone, no content policy attached) and **any centralized instance the project operates** (which will have rules and will act on credible reports by removing communities — without needing to read their content, since community-level removal doesn't require content access).
 - CSAM reporting-law compliance for any project-operated instance is treated as non-negotiable and outside the scope of "privacy tradeoffs" — it has no legitimate-use defense and no free-expression dimension.
-
----
-
-## 13. Roadmap
-
-```
-Phase 1 — Crypto library         ██████████ COMPLETE
-Phase 2 — Server                 ░░░░░░░░░░ not started
-Phase 3 — Protocol library       ░░░░░░░░░░ not started
-Phase 4 — TUI client             ░░░░░░░░░░ not started
-Phase 5 — Packaging & launch     ░░░░░░░░░░ not started
-```
-
-**Immediate next step (per most recent project discussion):** begin Phase 2 — server database schema design (informed directly by the now-concrete `epoch::grant::MemberEpochGrant` / `MemberEpochKeyRing` and DGMT public-parameter data structures from Phase 1), followed by the Axum server skeleton and Tor hidden-service integration.
-
-**Deferred hardening pass** (recommended before any real-world deployment, not blocking further feature work): items 1–4 in §10.
-
----
-
-## 14. Open Questions
-
-Carried forward, not yet decided:
-
-- Exact mobile client timeline (explicitly deferred past initial TUI + desktop release; "later we may expand to mobile as well if needed").
-- Whether/when to revisit constant-time field arithmetic, and whether that motivates moving off `num-bigint` toward a fixed-limb implementation before or after Phase 2.
-- Exact free-tier limits (posts/day, storage/GB, members/community) for the eventual centralized instance — placeholder figures were discussed (e.g. 5 GB, 500 posts/day, 150 members, 3 communities per founder credential) but not finalized.
