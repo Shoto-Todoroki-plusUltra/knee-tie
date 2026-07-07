@@ -89,7 +89,7 @@ knee-tie/
 ## Building & Testing
 
 ```bash
-git clone <this-repo>
+git clone https://github.com/Shoto-Todoroki-plusUltra/knee-tie.git
 cd knee-tie
 cargo test --workspace
 ```
